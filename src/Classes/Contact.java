@@ -22,7 +22,8 @@ public class Contact {
 	 * @param contactCity
 	 * @param contactPostcode
 	 */
-	public Contact(int iD, String contactFName, String contactLName, String contactTel, String contactEmail,
+	public Contact(int iD, 
+			String contactFName, String contactLName, String contactTel, String contactEmail,
 			String contactAddr1, String contactAddr2, String contactCity, String contactPostcode) {
 		super();
 		ID = iD;

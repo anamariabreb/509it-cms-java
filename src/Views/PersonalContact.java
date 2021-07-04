@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 public class PersonalContact extends JFrame {
 
 	private JPanel contentPane;
+	private final JScrollPane scrollPane = new JScrollPane();
 	private JTable persConTable;
 	private JTextField textField_ID;
 	private JTextField textField_FName;
@@ -113,6 +114,7 @@ public class PersonalContact extends JFrame {
 		contentPane.add(textField_HomeTel);
 		textField_HomeTel.setColumns(10);
 		
+		//Add Button action
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,18 +136,51 @@ public class PersonalContact extends JFrame {
 		btnAdd.setBounds(0, 183, 89, 23);
 		contentPane.add(btnAdd);
 		
+		//Update Button action
 		btnUpdate = new JButton("Update");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classes.PersonalContact persCon = new Classes.PersonalContact(
+						Integer.parseInt(textField_ID.getText()), 
+						textField_FName.getText(), 
+						textField_LName.getText(), 
+						textField_Tel.getText(), 
+						textField_HomeTel.getText(), 
+						textField_Email.getText(), 
+						textField_AddrL1.getText(), 
+						textField_AddrL2.getText(), 
+						textField_City.getText(),
+						textField_Postcode.getText());
+
+                mysqlConn.updateContact(persCon);
+			}
+		});
 		btnUpdate.setBounds(91, 183, 89, 23);
 		contentPane.add(btnUpdate);
 		
+		//Delete Button action
 		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classes.PersonalContact persCon = new Classes.PersonalContact();
+
+                mysqlConn.deleteContact(persCon);
+			}
+		});
 		btnDelete.setBounds(182, 183, 89, 23);
 		contentPane.add(btnDelete);
 		
+		//Exit Button action
 		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); //close the current view
+			}
+		});
 		btnExit.setBounds(404, 183, 89, 23);
 		contentPane.add(btnExit);
 		
+		//Homepage Button action
 		btnHomepage = new JButton("Homepage");
 		btnHomepage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

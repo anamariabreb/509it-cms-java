@@ -6,11 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dbConn.businessDbConn;
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BusinessContact extends JFrame {
 
@@ -22,6 +28,7 @@ public class BusinessContact extends JFrame {
 	private JTextField textField_LName;
 	private JTextField textField_Tel;
 	private JTextField textField_BusTel;
+	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
 	private JButton btnExit;
@@ -36,6 +43,8 @@ public class BusinessContact extends JFrame {
 	private JLabel lblAddrL2;
 	private JLabel lblCity;
 	private JLabel lblPostcode;
+	
+	dbConn.businessDbConn mysqlConn = new businessDbConn();
 
 	/**
 	 * Launch the application.
@@ -57,6 +66,9 @@ public class BusinessContact extends JFrame {
 	 * Create the frame.
 	 */
 	public BusinessContact() {
+		mysqlConn.Connect();
+		
+		
 		setTitle("Business Contacts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 505, 315);
@@ -115,24 +127,57 @@ public class BusinessContact extends JFrame {
 		lblBusTel.setBounds(10, 103, 46, 14);
 		contentPane.add(lblBusTel);
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(0, 167, 89, 23);
+		//Add Button action
+		btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classes.BusinessContact busCon = new Classes.BusinessContact(
+						Integer.parseInt(textField_ID.getText()), 
+						textField_FName.getText(), 
+						textField_LName.getText(), 
+						textField_Tel.getText(), 
+						textField_BusTel.getText(), 
+						textField_Email.getText(), 
+						textField_AddrL1.getText(), 
+						textField_AddrL2.getText(), 
+						textField_City.getText(),
+						textField_Postcode.getText());
+
+                mysqlConn.insertContact(busCon);
+			}
+		});
+		btnAdd.setBounds(0, 183, 89, 23);
 		contentPane.add(btnAdd);
 		
+		//Update Button action
 		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(92, 167, 89, 23);
+		btnUpdate.setBounds(91, 183, 89, 23);
 		contentPane.add(btnUpdate);
 		
+		//Delete Button action
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(186, 167, 89, 23);
+		btnDelete.setBounds(182, 183, 89, 23);
 		contentPane.add(btnDelete);
 		
+		//Exit Button action
 		btnExit = new JButton("Exit");
-		btnExit.setBounds(397, 167, 89, 23);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); //close the current view
+			}
+		});
+		btnExit.setBounds(404, 183, 89, 23);
 		contentPane.add(btnExit);
 		
 		btnHomepage = new JButton("Homepage");
-		btnHomepage.setBounds(306, 167, 89, 23);
+		btnHomepage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Homepage home = new Homepage();
+				dispose(); //close the current view
+				home.frame.setVisible(true); //open the Homepage view
+			}
+		});
+		btnHomepage.setBounds(313, 183, 89, 23);
 		contentPane.add(btnHomepage);
 		
 		textField_Email = new JTextField();
@@ -179,6 +224,9 @@ public class BusinessContact extends JFrame {
 		lblPostcode = new JLabel("Postcode");
 		lblPostcode.setBounds(306, 103, 46, 14);
 		contentPane.add(lblPostcode);
+		
+		//Display content in the table
+		busConTable.setModel(DbUtils.resultSetToTableModel(mysqlConn.view()));
 	}
 
 }
