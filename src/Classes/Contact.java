@@ -7,7 +7,7 @@ public class Contact {
 	}
 
     private int ID;
-    private String contactFName;
+    public static String contactFName;
     public int getID() {
 		return ID;
 	}
@@ -87,11 +87,11 @@ public class Contact {
 	public void setContactPostcode(String contactPostcode) {
 		this.contactPostcode = contactPostcode;
 	}
-	private String contactLName;
-    private String contactTel;
-    private String contactEmail;
-    private String contactAddr1;
-    private String contactAddr2;
-    private String contactCity;
-    private String contactPostcode;
+	public String contactLName;
+	public String contactTel;
+	public String contactEmail;
+	public String contactAddr1;
+	public String contactAddr2;
+    public String contactCity;
+    public String contactPostcode;
 }
