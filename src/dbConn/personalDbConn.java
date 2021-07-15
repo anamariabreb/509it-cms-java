@@ -125,4 +125,27 @@ public class personalDbConn extends dbConn {
 			}	
 			return rs;
 		}
+	
+
+//Search	
+public ResultSet search(String searchCriteria)
+{
+	ResultSet rs = null;
+	PreparedStatement PStatement = null;
+	String sql = "";
+
+	sql = "SELECT * FROM PersonalContact "
+			+ " WHERE contactFName LIKE '%"+ searchCriteria +"%'"
+					+ " OR contactLName LIKE '%"+ searchCriteria +"%'";
+			
+
+	try {
+	    PStatement = conn.prepareStatement(sql);
+	    rs = PStatement.executeQuery();
+
+		} catch(Exception ex) {	
+		    System.out.println("Error: "+ex);	
+		}	
+		return rs;
 	}
+}

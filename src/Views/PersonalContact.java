@@ -17,6 +17,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PersonalContact extends JFrame {
 
@@ -87,6 +92,15 @@ public class PersonalContact extends JFrame {
 		contentPane.add(scrollPane);
 		
 		persConTable = new JTable();
+		persConTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textField_ID.setText(
+						persConTable.getValueAt(persConTable.getSelectedRow(),0). toString()
+				);
+			}
+		});
+		persConTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(persConTable);
 		
 		textField_ID = new JTextField();
@@ -105,6 +119,16 @@ public class PersonalContact extends JFrame {
 		textField_LName.setColumns(10);
 		
 		textField_Tel = new JTextField();
+		textField_Tel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only numbers and back space and +
+				 char c = e.getKeyChar();
+			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)  && (c != '+')) {
+			         e.consume();  // ignore event
+			      }
+			}
+		});
 		textField_Tel.setBounds(67, 82, 86, 20);
 		contentPane.add(textField_Tel);
 		textField_Tel.setColumns(10);
@@ -259,5 +283,6 @@ public class PersonalContact extends JFrame {
 		
 		//Display content in the table
 		persConTable.setModel(DbUtils.resultSetToTableModel(mysqlConn.view()));
+		
 	}
 }

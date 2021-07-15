@@ -34,15 +34,24 @@ public class ContactTests {
 	
 	@Test
 	// test database connection is open
-	// needs review!!!
 	public void dbConnTestconnOpen()
     {
         dbConn.dbConn mysqlConn;
         mysqlConn = new dbConn.dbConn();
         mysqlConn.Connect();
 
+        assertNotNull(mysqlConn.Connect());
+    }
+	
+	@Test
+	// test database contains data
+	public void dbPersonalConnView()
+    {
+        dbConn.personalDbConn persDb;
+        persDb = new dbConn.personalDbConn();
+        persDb.Connect();
 
-        assertEquals("True", mysqlConn.Connect());
+        assertNotNull(persDb.view());
     }
 	
 
