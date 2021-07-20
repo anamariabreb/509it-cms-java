@@ -81,23 +81,31 @@ public class PersonalContact extends JFrame {
 		
 		setTitle("Personal Contacts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 505, 335);
+		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 217, 493, 66);
+		scrollPane.setBounds(0, 217, 674, 133);
 		contentPane.add(scrollPane);
 		
+		// Populate the form fields with data when double click on a table entry
 		persConTable = new JTable();
 		persConTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_ID.setText(
-						persConTable.getValueAt(persConTable.getSelectedRow(),0). toString()
-				);
+				textField_ID.setText(persConTable.getValueAt(persConTable.getSelectedRow(),0). toString());
+				textField_FName.setText(persConTable.getValueAt(persConTable.getSelectedRow(),1). toString());
+				textField_LName.setText(persConTable.getValueAt(persConTable.getSelectedRow(),2). toString());
+				textField_Tel.setText(persConTable.getValueAt(persConTable.getSelectedRow(),3). toString());
+				textField_HomeTel.setText(persConTable.getValueAt(persConTable.getSelectedRow(),4). toString());
+				textField_Email.setText(persConTable.getValueAt(persConTable.getSelectedRow(),5). toString());
+				textField_AddrL1.setText(persConTable.getValueAt(persConTable.getSelectedRow(),6). toString());
+				textField_AddrL2.setText(persConTable.getValueAt(persConTable.getSelectedRow(),7). toString());
+				textField_City.setText(persConTable.getValueAt(persConTable.getSelectedRow(),8). toString());
+				textField_Postcode.setText(persConTable.getValueAt(persConTable.getSelectedRow(),9). toString());
 			}
 		});
 		persConTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -155,6 +163,7 @@ public class PersonalContact extends JFrame {
 						textField_Postcode.getText());
 
                 mysqlConn.insertContact(persCon);
+                
 			}
 		});
 		btnAdd.setBounds(0, 183, 89, 23);
@@ -162,7 +171,7 @@ public class PersonalContact extends JFrame {
 		
 		//Update Button action
 		btnUpdate = new JButton("Update");
-		btnAdd.addActionListener(new ActionListener() {
+		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Classes.PersonalContact persCon = new Classes.PersonalContact(
 						Integer.parseInt(textField_ID.getText()), 
@@ -186,8 +195,18 @@ public class PersonalContact extends JFrame {
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Classes.PersonalContact persCon = new Classes.PersonalContact();
-
+				Classes.PersonalContact persCon = new Classes.PersonalContact(
+						Integer.parseInt(textField_ID.getText()), 
+						textField_FName.getText(), 
+						textField_LName.getText(), 
+						textField_Tel.getText(), 
+						textField_HomeTel.getText(), 
+						textField_Email.getText(), 
+						textField_AddrL1.getText(), 
+						textField_AddrL2.getText(), 
+						textField_City.getText(),
+						textField_Postcode.getText());
+				
                 mysqlConn.deleteContact(persCon);
 			}
 		});

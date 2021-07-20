@@ -40,7 +40,7 @@ public class Homepage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 505, 315);
+		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -52,7 +52,7 @@ public class Homepage {
 				persCon.setVisible(true); //open the Personal Contact view
 			}
 		});
-		btnPersonalContacts.setBounds(58, 148, 143, 23);
+		btnPersonalContacts.setBounds(138, 203, 143, 23);
 		frame.getContentPane().add(btnPersonalContacts);
 		
 		JButton btnNewButton = new JButton("Business Contacts");
@@ -63,11 +63,11 @@ public class Homepage {
 				persCon.setVisible(true); //open the Business Contact view
 			}
 		});
-		btnNewButton.setBounds(237, 148, 159, 23);
+		btnNewButton.setBounds(387, 203, 159, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Welcome! What would you like to do today?");
-		lblNewLabel.setBounds(120, 43, 210, 56);
+		lblNewLabel.setBounds(237, 65, 210, 56);
 		frame.getContentPane().add(lblNewLabel);
 	}
 }

@@ -51,21 +51,20 @@ public class personalDbConn extends dbConn {
 	}
 	
 	//Update
-	public boolean updateContact(PersonalContact persCon) 
+	public boolean updateContact(PersonalContact persCon)
 	{
-		String sql = "UPDATE `PersonalContact` " +
-                "SET "
-                + "contactFName=@contactFName, "
-                + "contactLName=@contactLName, "
-                + "contactTel=@contactTel, "
-                + "contactHomeTel=@contactHomeTel, "
-                + "contactEmail=@contactEmail, " +
-                "contactAddr1=@contactAddr1, "
-                + "contactAddr2=@contactAddr2, "
-                + "contactCity=@contactCity, "
-                + "contactPostcode=@contactPostcode " +
-                "WHERE ID=@ID;";
 
+		String sql = "UPDATE PersonalContact SET "
+				+ "contactFName = " + "'" + persCon.getContactFName() + "'" + " , " 
+				+ "contactLName = " + "'" + persCon.getContactLName() + "'" + " , "
+				+ "contactTel = " + persCon.getContactTel() + " , "
+				+ "contactHomeTel = " + persCon.getContactHomeTel() + " , "
+				+ "contactEmail = " + "'" + persCon.getContactEmail() + "'" + " , "
+				+ "contactAddr1 = " + "'" + persCon.getContactAddr1() + "'" + " , "
+				+ "contactAddr2 = " + "'" + persCon.getContactAddr2() + "'" + " , "
+				+ "contactCity = " + "'" + persCon.getContactCity() + "'" + " , "
+				+ "contactPostcode = " + "'" + persCon.getContactPostcode() + "'"
+				+ " WHERE ID =" + persCon.getID();
 
 		Statement stmt = null;
 		try {
@@ -87,24 +86,24 @@ public class personalDbConn extends dbConn {
 	//Delete
 	public boolean deleteContact(PersonalContact persCon) 
 	{
-		String sql = "DELETE FROM `PersonalContact` WHERE ID = @ID";
-
+		int ID = persCon.getID();
+		String sql = "DELETE FROM PersonalContact WHERE ID = " + ID;
 
 		Statement stmt = null;
 		try {
-		       // set stmt to create statement
-		       stmt = conn.createStatement();
-		       // executeUpdate() function runs condition like insert, update, delete, drop etc
-		       // executeUpdate return 1 if true 0 if false
-		       if(stmt.executeUpdate(sql) == 1){
-		       // if true show information message
-		       System.out.println("Deleted");
-		           return true;
-		       }
+		    // set stmt to create statement
+		    stmt = conn.createStatement();
+		    // executeUpdate() function runs condition like insert, update, delete, drop etc
+		    // executeUpdate return 1 if true 0 if false
+		    if(stmt.executeUpdate(sql) == 1){
+		    // if true show information message
+		    System.out.println("Deleted");
+		        return true;
+		    }
 		} catch(Exception ex) {
-		    System.out.println("Error: "+ex);
+			System.out.println("Error: "+ex);
 		}
-		  return false;
+		return false;
 	}
 	
 	//View	
@@ -127,7 +126,7 @@ public class personalDbConn extends dbConn {
 		}
 	
 
-//Search	
+//Search by first and last name, email address	
 public ResultSet search(String searchCriteria)
 {
 	ResultSet rs = null;
@@ -136,7 +135,8 @@ public ResultSet search(String searchCriteria)
 
 	sql = "SELECT * FROM PersonalContact "
 			+ " WHERE contactFName LIKE '%"+ searchCriteria +"%'"
-					+ " OR contactLName LIKE '%"+ searchCriteria +"%'";
+			+ " OR contactLName LIKE '%"+ searchCriteria +"%'"
+					+ " OR contactEmail LIKE '%"+ searchCriteria +"%'";
 			
 
 	try {

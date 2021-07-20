@@ -71,12 +71,12 @@ public class BusinessContact extends JFrame {
 		
 		setTitle("Business Contacts");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 505, 315);
+		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		scrollPane.setBounds(0, 212, 486, 64);
+		scrollPane.setBounds(0, 212, 674, 138);
 		contentPane.add(scrollPane);
 		
 		busConTable = new JTable();
