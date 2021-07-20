@@ -117,20 +117,41 @@ public class PersonalContact extends JFrame {
 		textField_ID.setColumns(10);
 		
 		textField_FName = new JTextField();
+		textField_FName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_FName.setBounds(67, 35, 86, 20);
 		contentPane.add(textField_FName);
 		textField_FName.setColumns(10);
 		
 		textField_LName = new JTextField();
+		textField_LName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_LName.setBounds(67, 59, 86, 20);
 		contentPane.add(textField_LName);
 		textField_LName.setColumns(10);
 		
 		textField_Tel = new JTextField();
+		// Tel Field Validation
 		textField_Tel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// allows only numbers and back space and +
+				// allows only numbers, back space and +
 				 char c = e.getKeyChar();
 			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)  && (c != '+')) {
 			         e.consume();  // ignore event
@@ -142,6 +163,17 @@ public class PersonalContact extends JFrame {
 		textField_Tel.setColumns(10);
 		
 		textField_HomeTel = new JTextField();
+		// Home Tel Field Validation
+		textField_HomeTel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only numbers, back space and +
+				 char c = e.getKeyChar();
+			     if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)  && (c != '+')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_HomeTel.setBounds(67, 106, 86, 20);
 		contentPane.add(textField_HomeTel);
 		textField_HomeTel.setColumns(10);
@@ -261,16 +293,56 @@ public class PersonalContact extends JFrame {
 		textField_Email.setColumns(10);
 		
 		textField_AddrL1 = new JTextField();
+		textField_AddrL1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows letters, numbers, space, period and coma
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) 
+			    		 && ((c < 'a') || (c > 'z'))
+			    		 && ((c < '0') || (c > '9')) 
+			    		 && (c != KeyEvent.VK_BACK_SPACE)  
+			    		 && (c != '.')
+			    		 && (c != ',')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_AddrL1.setBounds(397, 35, 86, 20);
 		contentPane.add(textField_AddrL1);
 		textField_AddrL1.setColumns(10);
 		
 		textField_AddrL2 = new JTextField();
+		textField_AddrL2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows letters, numbers, space, period and coma
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) 
+			    		 && ((c < 'a') || (c > 'z'))
+			    		 && ((c < '0') || (c > '9')) 
+			    		 && (c != KeyEvent.VK_BACK_SPACE)  
+			    		 && (c != '.')
+			    		 && (c != ',')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_AddrL2.setBounds(397, 59, 86, 20);
 		contentPane.add(textField_AddrL2);
 		textField_AddrL2.setColumns(10);
 		
 		textField_City = new JTextField();
+		textField_LName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_City.setBounds(397, 82, 86, 20);
 		contentPane.add(textField_City);
 		textField_City.setColumns(10);

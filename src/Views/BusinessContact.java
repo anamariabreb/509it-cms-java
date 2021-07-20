@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BusinessContact extends JFrame {
 
@@ -105,21 +107,63 @@ public class BusinessContact extends JFrame {
 		textField_ID.setColumns(10);
 		
 		textField_FName = new JTextField();
+		textField_FName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_FName.setBounds(66, 33, 86, 20);
 		contentPane.add(textField_FName);
 		textField_FName.setColumns(10);
 		
 		textField_LName = new JTextField();
+		textField_LName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_LName.setBounds(66, 56, 86, 20);
 		contentPane.add(textField_LName);
 		textField_LName.setColumns(10);
 		
 		textField_Tel = new JTextField();
+		// Tel Field Validation
+		textField_Tel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only numbers, back space and +
+				 char c = e.getKeyChar();
+			     if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)  && (c != '+')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_Tel.setBounds(66, 79, 86, 20);
 		contentPane.add(textField_Tel);
 		textField_Tel.setColumns(10);
 		
 		textField_BusTel = new JTextField();
+		// Business Tel Field Validation
+		textField_BusTel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only numbers, back space and +
+				 char c = e.getKeyChar();
+			     if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)  && (c != '+')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_BusTel.setBounds(66, 100, 86, 20);
 		contentPane.add(textField_BusTel);
 		textField_BusTel.setColumns(10);
@@ -185,9 +229,11 @@ public class BusinessContact extends JFrame {
 
                 mysqlConn.updateContact(busCon);
 			}
+			
 		});
 		btnUpdate.setBounds(91, 183, 89, 23);
 		contentPane.add(btnUpdate);
+		
 				
 		
 		//Delete Button action
@@ -239,16 +285,58 @@ public class BusinessContact extends JFrame {
 		textField_Email.setColumns(10);
 		
 		textField_AddrL1 = new JTextField();
+		textField_AddrL1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows letters, numbers, space, period and coma
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) 
+			    		 && ((c < 'a') || (c > 'z'))
+			    		 && ((c < '0') || (c > '9')) 
+			    		 && (c != KeyEvent.VK_BACK_SPACE)  
+			    		 && (c != '.')
+			    		 && (c != ',')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_AddrL1.setBounds(397, 33, 86, 20);
 		contentPane.add(textField_AddrL1);
 		textField_AddrL1.setColumns(10);
 		
 		textField_AddrL2 = new JTextField();
+		textField_AddrL2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows letters, numbers, space, period and coma
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) 
+			    		 && ((c < 'a') || (c > 'z'))
+			    		 && ((c < '0') || (c > '9')) 
+			    		 && (c != KeyEvent.VK_BACK_SPACE)  
+			    		 && (c != '.')
+			    		 && (c != ',')) {
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_AddrL2.setBounds(397, 56, 86, 20);
 		contentPane.add(textField_AddrL2);
 		textField_AddrL2.setColumns(10);
 		
 		textField_City = new JTextField();
+		textField_City.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// allows only letters and space
+				 char c = e.getKeyChar();
+			     if (((c < 'A') || (c > 'Z')) 
+			    		 && ((c < 'a') || (c > 'z'))
+			    		 && (c != KeyEvent.VK_BACK_SPACE)){
+			    	 e.consume();  // ignore event
+			     }
+			}
+		});
 		textField_City.setBounds(397, 79, 86, 20);
 		contentPane.add(textField_City);
 		textField_City.setColumns(10);
