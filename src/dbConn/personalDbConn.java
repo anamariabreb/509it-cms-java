@@ -53,7 +53,6 @@ public class personalDbConn extends dbConn {
 	//Update
 	public boolean updateContact(PersonalContact persCon)
 	{
-
 		String sql = "UPDATE PersonalContact SET "
 				+ "contactFName = " + "'" + persCon.getContactFName() + "'" + " , " 
 				+ "contactLName = " + "'" + persCon.getContactLName() + "'" + " , "
@@ -122,8 +121,8 @@ public class personalDbConn extends dbConn {
 			} catch(Exception ex) {	
 			    System.out.println("Error: "+ex);	
 			}	
-			return rs;
-		}
+		return rs;
+	}
 	
 
 //Search by first and last name, email address	

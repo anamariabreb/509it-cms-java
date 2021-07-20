@@ -51,10 +51,63 @@ public class businessDbConn extends dbConn {
 	}
 	
 	//Update
-	
+	public boolean updateContact(BusinessContact busCon)
+	{
+		String sql = "UPDATE BusinessContact SET "
+				+ "contactFName = " + "'" + busCon.getContactFName() + "'" + " , " 
+				+ "contactLName = " + "'" + busCon.getContactLName() + "'" + " , "
+				+ "contactTel = " + busCon.getContactTel() + " , "
+				+ "contactBusinessTel = " + busCon.getContactBusinessTel() + " , "
+				+ "contactEmail = " + "'" + busCon.getContactEmail() + "'" + " , "
+				+ "contactAddr1 = " + "'" + busCon.getContactAddr1() + "'" + " , "
+				+ "contactAddr2 = " + "'" + busCon.getContactAddr2() + "'" + " , "
+				+ "contactCity = " + "'" + busCon.getContactCity() + "'" + " , "
+				+ "contactPostcode = " + "'" + busCon.getContactPostcode() + "'"
+				+ " WHERE ID =" + busCon.getID();
+
+		Statement stmt = null;
+		try {
+		       // set stmt to create statement
+		       stmt = conn.createStatement();
+		       // executeUpdate() function runs condition like insert, update, delete, drop etc
+		       // executeUpdate return 1 if true 0 if false
+		       if(stmt.executeUpdate(sql) == 1){
+		       // if true show information message
+		       System.out.println("Updated");
+		           return true;
+		       }
+		} catch(Exception ex) {
+		    System.out.println("Error: "+ex);
+		}
+		  return false;
+	}
+		
+		
 	//Delete
+	public boolean deleteContact(BusinessContact busCon) 
+	{
+		int ID = busCon.getID();
+		String sql = "DELETE FROM BusinessContact WHERE ID = " + ID;
+
+		Statement stmt = null;
+		try {
+		    // set stmt to create statement
+		    stmt = conn.createStatement();
+		    // executeUpdate() function runs condition like insert, update, delete, drop etc
+		    // executeUpdate return 1 if true 0 if false
+		    if(stmt.executeUpdate(sql) == 1){
+		    // if true show information message
+		    System.out.println("Deleted");
+		        return true;
+		    }
+		} catch(Exception ex) {
+			System.out.println("Error: "+ex);
+		}
+		return false;
+	}
 	
-	//View	
+
+	// View
 	public ResultSet view()
 	{
 		ResultSet rs = null;
@@ -70,6 +123,6 @@ public class businessDbConn extends dbConn {
 			} catch(Exception ex) {	
 			    System.out.println("Error: "+ex);	
 			}	
-			return rs;
-		}
+		return rs;
 	}
+}

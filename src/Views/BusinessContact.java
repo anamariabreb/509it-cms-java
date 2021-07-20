@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class BusinessContact extends JFrame {
@@ -80,6 +82,21 @@ public class BusinessContact extends JFrame {
 		contentPane.add(scrollPane);
 		
 		busConTable = new JTable();
+		busConTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textField_ID.setText(busConTable.getValueAt(busConTable.getSelectedRow(),0). toString());
+				textField_FName.setText(busConTable.getValueAt(busConTable.getSelectedRow(),1). toString());
+				textField_LName.setText(busConTable.getValueAt(busConTable.getSelectedRow(),2). toString());
+				textField_Tel.setText(busConTable.getValueAt(busConTable.getSelectedRow(),3). toString());
+				textField_BusTel.setText(busConTable.getValueAt(busConTable.getSelectedRow(),4). toString());
+				textField_Email.setText(busConTable.getValueAt(busConTable.getSelectedRow(),5). toString());
+				textField_AddrL1.setText(busConTable.getValueAt(busConTable.getSelectedRow(),6). toString());
+				textField_AddrL2.setText(busConTable.getValueAt(busConTable.getSelectedRow(),7). toString());
+				textField_City.setText(busConTable.getValueAt(busConTable.getSelectedRow(),8). toString());
+				textField_Postcode.setText(busConTable.getValueAt(busConTable.getSelectedRow(),9). toString());
+			}
+		});
 		scrollPane.setViewportView(busConTable);
 		
 		textField_ID = new JTextField();
@@ -144,6 +161,7 @@ public class BusinessContact extends JFrame {
 						textField_Postcode.getText());
 
                 mysqlConn.insertContact(busCon);
+                
 			}
 		});
 		btnAdd.setBounds(0, 183, 89, 23);
@@ -151,11 +169,46 @@ public class BusinessContact extends JFrame {
 		
 		//Update Button action
 		btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classes.BusinessContact busCon = new Classes.BusinessContact(
+						Integer.parseInt(textField_ID.getText()), 
+						textField_FName.getText(), 
+						textField_LName.getText(), 
+						textField_Tel.getText(), 
+						textField_BusTel.getText(), 
+						textField_Email.getText(), 
+						textField_AddrL1.getText(), 
+						textField_AddrL2.getText(), 
+						textField_City.getText(),
+						textField_Postcode.getText());
+
+                mysqlConn.updateContact(busCon);
+			}
+		});
 		btnUpdate.setBounds(91, 183, 89, 23);
 		contentPane.add(btnUpdate);
+				
 		
 		//Delete Button action
 		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classes.BusinessContact busCon = new Classes.BusinessContact(
+						Integer.parseInt(textField_ID.getText()), 
+						textField_FName.getText(), 
+						textField_LName.getText(), 
+						textField_Tel.getText(), 
+						textField_BusTel.getText(), 
+						textField_Email.getText(), 
+						textField_AddrL1.getText(), 
+						textField_AddrL2.getText(), 
+						textField_City.getText(),
+						textField_Postcode.getText());
+				
+                mysqlConn.deleteContact(busCon);
+			}
+		});
 		btnDelete.setBounds(182, 183, 89, 23);
 		contentPane.add(btnDelete);
 		
